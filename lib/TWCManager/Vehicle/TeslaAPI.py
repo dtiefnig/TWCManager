@@ -1053,10 +1053,9 @@ class TeslaAPI:
         # Extract code from url
         if isinstance(url, bytes):
             url = url.decode("UTF-8")
-        code = re.search(r"code=(.+)&state=(.+)", url)
+        code = re.search(r"[?&]code=([^&]+)", url)
 
         logger.log(logging.INFO2, "Code: " + code.group(1))
-        logger.log(logging.INFO2, "State: " + code.group(2))
 
         # Exchange auth code for bearer token
         headers = {"accept": "application/json", "Content-Type": "application/json"}
